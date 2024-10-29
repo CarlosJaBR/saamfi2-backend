@@ -1,0 +1,90 @@
+Seguir los siguientes pasos para desplegar los servicios en un servidor de tomcat.
+
+ 0. Instalar java. version 11
+
+ 1. Instalación tomcat.
+
+    * Descargar los binarios de la version 9.* de tomcat.
+        wget https://dlcdn.apache.org/tomcat/tomcat-9/v9.0.74/bin/apache-tomcat-9.0.74.zip
+
+    * Descomprimir.
+        unzip apache-tomcat-9.0.74.zip
+
+    * Configurar variables de entorno.
+        entrar a la carpeta apache-tomcat-9.0.74, correr el comando pwd y copiar la ruta.
+        en el archivo ~/.bashrc o ~/.bash_profile añadir las siguientes lineas.
+            export CATALINA_HOME="ruta_de_la_carpeta"
+            export PATH=$PATH:$CATALINA_HOME/bin
+
+2. Configurar tomcat.
+    * Si la administración de tomcat es remota debe configurar lo siguiente:
+        - usuario.
+            en el archivo config/tomcat-user.xml debe definir   <user username="admin" password="password" roles="manager-gui"/>
+        - server.
+            en el archivo config/server.xml buscar la definicion del <Connector> y agregar el atributo address="0.0.0.0"
+        - manager.
+            en el archivo webapps/manager/META-INF/contex.xml verificar la valve: <Valve className="org.apache.catalina.valves.RemoteAddrValve"
+             allow="reemplaza por las ips que puedan acceder a administrar" /> ej ip:"10\.147\.19\.\d+" deja a todos los host dentro del 10.147.19.*
+        
+            en el archivo webapps/manager/WEB-INF/web.xml verificar el tamaño maximo de archivos que se puedan subir por la gui.
+             <multipart-config>
+                <!-- 60MB max -->
+                <max-file-size>62428800</max-file-size>
+                <max-request-size>62428800</max-request-size>
+                <file-size-threshold>0</file-size-threshold>
+            </multipart-config>
+    * Correr tomcat
+        - catalina.sh start
+    * detener tomcat
+        - catalina.sh stop
+
+3. Instalación y Despliegue de los servicios (saamfi-backend).
+
+    * Entrar a la carpeta saamfi-backend.
+    * asegurese de estar en la rama que quiere desplegar. git branch -v
+    * correr "./mvnw -DskipTests clean package"
+    * copiar archivos de configuración: puede copiarlos de la carpeta resources del proyecto saamfi-rest.
+        - dentro de $CATALINA_HOME/conf correr "mkdir saamfi"
+        - el folder creado debe contener:
+            a. saamfi-application.properties: asegurese que la propiedad de base de datos correspona a la de producción.
+            b. private_key.der: llave privada con la que se firman los tokens.
+                para crear nuevos archivos usa openssl:
+                    ~ openssl genpkey -algorithm RSA -out private_key.pem
+                    ~ openssl pkcs8 -topk8 -inform PEM -outform DER -in private_key.pem -out private_key.der -nocrypt
+            c. public_key.der: llave publica con la que se verifica que la información sea confiable.
+                para crear el archivo usa openssl:
+                    ~ openssl rsa -in private_key.pem -pubout -outform DER -out public_key.der
+            El archivo private_key.pem se puede eliminar.
+    * copiar el .war generado en saamfi-rest/target/saamfiapi.war
+        - si el tomcat esta en el mismo equipo: cp saamfi-rest/target/saamfiapi.war $CATALINA_HOME/webapps/
+        - si esta en server remoto: scp saamfi-rest/target/saamfiapi.war user@host:CATALINA_HOME/webapps/
+    * Verificar el despliegue:
+        - dirigirse a http://host:8080/saamfiapi/public/institutions ese servicio debe desplegar las instituciones en el sistema.
+        - si no devuelve la información deseada puede revisar si hubo algún problema en el archivo $CATALINA_HOME/logs/catalina.out
+    
+4. Instalación y despliegue de la vista (saamfi-frontend).
+
+    * Entrar a la carpeta saamfi-frontend.
+    * asegurese de estar en la rama que quiere desplegar. git branch -v
+    * editar el archivo .env.prod
+        - cambiar el valor de REACT_APP_BASE_URL por la direccion donde se desplegó el backend.
+    * correr "npm run build:prod"
+    * cambiar el nombre de la carpeta de build/ a saamfi/
+    * dentro de la carpeta saamfi/ crear una carpeta llamada WEB-INF y añadir el archivo web.xml
+        - copiar lo siguiente dentro del archivo web.xml:
+            <web-app>
+                <error-page>
+                    <error-code>404</error-code>
+                    <location>/index.html</location>
+                </error-page>
+            </web-app>
+    * copiar la carpeta saamfi/ dentro de $CATALINA_HOME/webapps
+        - si el tomcat esta en el mismo equipo: cp -r saamfi/ $CATALINA_HOME/webapps/
+        - si esta en server remoto: scp -r saamfi/ user@host:CATALINA_HOME/webapps/
+    * Verificar el despliegue:
+        - dirigirse a http://host:8080/saamfi/ ese servicio debe desplegar la página del login.
+        - si no devuelve la información deseada puede revisar si hubo algún problema en el archivo $CATALINA_HOME/logs/catalina.out
+
+            
+        
+

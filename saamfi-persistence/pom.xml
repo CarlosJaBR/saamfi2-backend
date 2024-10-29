@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<parent>
+		<groupId>co.edu.icesi.dev.saamfi</groupId>
+		<artifactId>saamfi-masterpom</artifactId>
+		<version>2.0.1</version>
+	</parent>
+
+	<artifactId>saamfi-persistence</artifactId>
+	<name>saamfi-persistence</name>
+	<description>System of Authentication and Authorization Multifactor - DAO's for entities</description>
+
+	<properties>
+		<java.version>11</java.version>
+	</properties>
+
+	<dependencies>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-data-jpa</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>oracle</groupId>
+			<artifactId>ojdbc6</artifactId>
+			<version>11.2.0.3</version>
+		</dependency>
+		<dependency>
+			<groupId>co.edu.icesi.dev.saamfi</groupId>
+			<artifactId>saamfi-entity</artifactId>
+		</dependency>
+	</dependencies>
+
+</project>

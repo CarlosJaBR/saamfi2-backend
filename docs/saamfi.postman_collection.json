@@ -1,0 +1,1514 @@
+{
+	"info": {
+		"_postman_id": "819df55a-c4fc-455e-8f65-097a1e29a64f",
+		"name": "saamfi",
+		"description": "Servicios REST para autenticacín y autorización",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "20213136"
+	},
+	"item": [
+		{
+			"name": "Authentication",
+			"item": [
+				{
+					"name": "UserSaamfi",
+					"item": [
+						{
+							"name": "changePassword",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"userId\":1,\r\n    \"userPassword\":\"newPassword\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{basePath}}/usr/institutions/{{instid}}/systems/{{sysid}}/users/change-password",
+									"host": [
+										"{{basePath}}"
+									],
+									"path": [
+										"usr",
+										"institutions",
+										"{{instid}}",
+										"systems",
+										"{{sysid}}",
+										"users",
+										"change-password"
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"description": "Servicios para actualizar los usuarios.",
+					"auth": {
+						"type": "bearer",
+						"bearer": [
+							{
+								"key": "token",
+								"value": "{{token}}",
+								"type": "string"
+							}
+						]
+					},
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									""
+								]
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									""
+								]
+							}
+						}
+					]
+				},
+				{
+					"name": "superSaamfiUser",
+					"item": [
+						{
+							"name": "createUser",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"userPassword\":\"{{passwordSuper}}\",\r\n\r\n\t\"userUsername\":\"{{userSuper}}\",\r\n\r\n\t\"userPasswordConfirmation\":\"userTestCreate\",\r\n\r\n\t\"userPhone\":\"3148288644\",\r\n\r\n\t\"userEmail\":\"test@saamfi.com\",\r\n\r\n\t\"userDocumentId\":\"123131313\",\r\n\r\n\t\"userIsActive\":\"Y\",\r\n\r\n\t\"userLastname\":\"testCreate\",\r\n\r\n\t\"userName\":\"userSuper\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{basePath}}//super/institutions/1/systems/0/users",
+									"host": [
+										"{{basePath}}"
+									],
+									"path": [
+										"",
+										"super",
+										"institutions",
+										"1",
+										"systems",
+										"0",
+										"users"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "publicSaamfiUser",
+					"item": [
+						{
+							"name": "createUser",
+							"protocolProfileBehavior": {
+								"disabledSystemHeaders": {
+									"accept-encoding": true
+								}
+							},
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"userPassword\":\"{{passwordPublic}}\",\r\n\r\n\t\"userUsername\":\"{{userPublic}}\",\r\n\r\n\t\"userPasswordConfirmation\":\"userTestCreate\",\r\n\r\n\t\"userPhone\":\"3148288644\",\r\n\r\n\t\"userEmail\":\"test@saamfi.com\",\r\n\r\n\t\"userDocumentId\":\"123131313\",\r\n\r\n\t\"userIsActive\":\"Y\",\r\n\r\n\t\"userLastname\":\"testCreate\",\r\n\r\n\t\"userName\":\"userPublic\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{basePath}}/public/institutions/{{instid}}/systems/{{sysid}}/users/",
+									"host": [
+										"{{basePath}}"
+									],
+									"path": [
+										"public",
+										"institutions",
+										"{{instid}}",
+										"systems",
+										"{{sysid}}",
+										"users",
+										""
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "login",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"var jsonData = pm.response.json();\r",
+											"let token = jsonData.accessToken;\r",
+											"pm.collectionVariables.set(\"token\", token);\r",
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"username\":\"{{userPublic}}\",\r\n    \"password\":\"{{passwordPublic}}\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{basePath}}/public/institutions/{{instid}}/systems/{{sysid}}/users/login",
+									"host": [
+										"{{basePath}}"
+									],
+									"path": [
+										"public",
+										"institutions",
+										"{{instid}}",
+										"systems",
+										"{{sysid}}",
+										"users",
+										"login"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "validateToken",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"url": {
+									"raw": "{{basePath}}/public/institutions/{{instid}}/systems/{{sysid}}/users/validate-token",
+									"host": [
+										"{{basePath}}"
+									],
+									"path": [
+										"public",
+										"institutions",
+										"{{instid}}",
+										"systems",
+										"{{sysid}}",
+										"users",
+										"validate-token"
+									]
+								},
+								"description": "Endpoint for validate user token"
+							},
+							"response": []
+						},
+						{
+							"name": "validateUser",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"username\":\"{{userPublic}}\",\r\n    \"password\":\"{{passwordPublic}}\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{basePath}}/public/institutions/{{instid}}/systems/{{sysid}}/users/validate-user",
+									"host": [
+										"{{basePath}}"
+									],
+									"path": [
+										"public",
+										"institutions",
+										"{{instid}}",
+										"systems",
+										"{{sysid}}",
+										"users",
+										"validate-user"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "accountRecoveryEmail",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"userDocumentId\":\"\",\r\n    \"userEmail\":\"\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{basePath}}/public/institutions/{{instid}}/systems/{{sysid}}/users/account-email",
+									"host": [
+										"{{basePath}}"
+									],
+									"path": [
+										"public",
+										"institutions",
+										"{{instid}}",
+										"systems",
+										"{{sysid}}",
+										"users",
+										"account-email"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "getInstitutions",
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{basePath}}/public/institutions/",
+									"host": [
+										"{{basePath}}"
+									],
+									"path": [
+										"public",
+										"institutions",
+										""
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "publicCaptcha",
+					"item": [
+						{
+							"name": "publicKey",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{basePath}}/public/institutions/{{instid}}/recaptcha/public-key",
+									"host": [
+										"{{basePath}}"
+									],
+									"path": [
+										"public",
+										"institutions",
+										"{{instid}}",
+										"recaptcha",
+										"public-key"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "validate",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"reCaptchaResponse\":{{captcha}}\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{basePath}}/public/institutions/{{instid}}/recaptcha/",
+									"host": [
+										"{{basePath}}"
+									],
+									"path": [
+										"public",
+										"institutions",
+										"{{instid}}",
+										"recaptcha",
+										""
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "operSaamfiUser",
+					"item": [
+						{
+							"name": "createUser",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"userPassword\":{{passwordOper}},\r\n\r\n\t\"userUsername\":{{userOper}},\r\n\r\n\t\"userPasswordConfirmation\":\"userTestCreate\",\r\n\r\n\t\"userPhone\":\"3148288644\",\r\n\r\n\t\"userEmail\":\"test@saamfi.com\",\r\n\r\n\t\"userDocumentId\":\"123131313\",\r\n\r\n\t\"userIsActive\":\"Y\",\r\n\r\n\t\"userLastname\":\"testCreate\",\r\n\r\n\t\"userName\":\"userOper\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{basePath}}/oper/institutions/{{instid}}/systems/{{sysid}}/users/",
+									"host": [
+										"{{basePath}}"
+									],
+									"path": [
+										"oper",
+										"institutions",
+										"{{instid}}",
+										"systems",
+										"{{sysid}}",
+										"users",
+										""
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "adminSaamfiUser",
+					"item": [
+						{
+							"name": "addUser",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"userPassword\":\"{{passwordAdmin}}\",\r\n\r\n\t\"userUsername\":\"{{userAdmin}}\",\r\n\r\n\t\"userPasswordConfirmation\":\"userTestCreate\",\r\n\r\n\t\"userPhone\":\"3148288644\",\r\n\r\n\t\"userEmail\":\"test@saamfi.com\",\r\n\r\n\t\"userDocumentId\":\"123131313\",\r\n\r\n\t\"userIsActive\":\"Y\",\r\n\r\n\t\"userLastname\":\"testCreate\",\r\n\r\n\t\"userName\":\"userAdmin\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{basePath}}/adm/institutions/{{instid}}/systems/{{sysid}}/users/",
+									"host": [
+										"{{basePath}}"
+									],
+									"path": [
+										"adm",
+										"institutions",
+										"{{instid}}",
+										"systems",
+										"{{sysid}}",
+										"users",
+										""
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "changePassword",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"userId\":1,\r\n    \"userPassword\":\"newPassword\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{basePath}}/adm/institutions/{{instid}}/systems/{{sysid}}/users/change-password",
+									"host": [
+										"{{basePath}}"
+									],
+									"path": [
+										"adm",
+										"institutions",
+										"{{instid}}",
+										"systems",
+										"{{sysid}}",
+										"users",
+										"change-password"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "deleteUser-deletePerson",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{basePath}}/adm/institutions/{{instid}}/systems/{{sysid}}/users/{{userid}}",
+									"host": [
+										"{{basePath}}"
+									],
+									"path": [
+										"adm",
+										"institutions",
+										"{{instid}}",
+										"systems",
+										"{{sysid}}",
+										"users",
+										"{{userid}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "getPerson-getUser",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{basePath}}/adm/institutions/{{instid}}/systems/{{sysid}}/users/{{userid}}",
+									"host": [
+										"{{basePath}}"
+									],
+									"path": [
+										"adm",
+										"institutions",
+										"{{instid}}",
+										"systems",
+										"{{sysid}}",
+										"users",
+										"{{userid}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "getUsers",
+							"request": {
+								"method": "GET",
+								"header": []
+							},
+							"response": []
+						},
+						{
+							"name": "modifyUser",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"userUsername\":\"\",\r\n\r\n\t\"userPassword\":\"\",\r\n\r\n\t\"userPasswordConfirmation\":\"\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{basePath}}/adm/institutions/{{instid}}/systems/{{sysid}}/users/{{userid}}",
+									"host": [
+										"{{basePath}}"
+									],
+									"path": [
+										"adm",
+										"institutions",
+										"{{instid}}",
+										"systems",
+										"{{sysid}}",
+										"users",
+										"{{userid}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "personByIdDocument",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{basePath}}/adm/institutions/{{instid}}/systems/{{sysid}}/users/bydoc/{{idDocument}}",
+									"host": [
+										"{{basePath}}"
+									],
+									"path": [
+										"adm",
+										"institutions",
+										"{{instid}}",
+										"systems",
+										"{{sysid}}",
+										"users",
+										"bydoc",
+										"{{idDocument}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "uploadFile",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"url": {
+									"raw": "{{basePath}}/adm/institutions/{{instid}}/systems/{{sysid}}/users/csv",
+									"host": [
+										"{{basePath}}"
+									],
+									"path": [
+										"adm",
+										"institutions",
+										"{{instid}}",
+										"systems",
+										"{{sysid}}",
+										"users",
+										"csv"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Authorization",
+			"item": [
+				{
+					"name": "AdmRolPermissionnController",
+					"item": [
+						{
+							"name": "addPermissionToRole",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"url": {
+									"raw": "{{basePath}}/adm/institutions/{{instid}}/systems/{{sysid}}/roles/{{roleeId}}/permissions/{{perrmissionsId}}",
+									"host": [
+										"{{basePath}}"
+									],
+									"path": [
+										"adm",
+										"institutions",
+										"{{instid}}",
+										"systems",
+										"{{sysid}}",
+										"roles",
+										"{{roleeId}}",
+										"permissions",
+										"{{perrmissionsId}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "deletePermissionToRole",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{basePath}}/adm/institutions/{{instid}}/systems/{{sysid}}/roles/{{roleeId}}/permissions/{{perrmissionsId}}",
+									"host": [
+										"{{basePath}}"
+									],
+									"path": [
+										"adm",
+										"institutions",
+										"{{instid}}",
+										"systems",
+										"{{sysid}}",
+										"roles",
+										"{{roleeId}}",
+										"permissions",
+										"{{perrmissionsId}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "queryPermissionsOfARole",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{basePath}}/adm/institutions/{{instid}}/systems/{{sysid}}/roles/{{roleeId}}/permissions/",
+									"host": [
+										"{{basePath}}"
+									],
+									"path": [
+										"adm",
+										"institutions",
+										"{{instid}}",
+										"systems",
+										"{{sysid}}",
+										"roles",
+										"{{roleeId}}",
+										"permissions",
+										""
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "AdmSaamfiPermissionController",
+					"item": [
+						{
+							"name": "getAllPermissions",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{basePath}}/adm/institutions/{{instid}}/systems/{{sysid}}/permissions/",
+									"host": [
+										"{{basePath}}"
+									],
+									"path": [
+										"adm",
+										"institutions",
+										"{{instid}}",
+										"systems",
+										"{{sysid}}",
+										"permissions",
+										""
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "AdmSaamfiRoleController",
+					"item": [
+						{
+							"name": "createRole",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"roleDescription\":\"\",\r\n\r\n\t\"roleName\":\"\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{basePath}}/adm/institutions/{{instid}}/systems/{{sysid}}/roles/",
+									"host": [
+										"{{basePath}}"
+									],
+									"path": [
+										"adm",
+										"institutions",
+										"{{instid}}",
+										"systems",
+										"{{sysid}}",
+										"roles",
+										""
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "New Request",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{basePath}}/adm/institutions/{{instid}}/systems/{{sysid}}/roles/{{roleeId}}",
+									"host": [
+										"{{basePath}}"
+									],
+									"path": [
+										"adm",
+										"institutions",
+										"{{instid}}",
+										"systems",
+										"{{sysid}}",
+										"roles",
+										"{{roleeId}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "getRoles",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{basePath}}/adm/institutions/{{instid}}/systems/{{sysid}}/roles/",
+									"host": [
+										"{{basePath}}"
+									],
+									"path": [
+										"adm",
+										"institutions",
+										"{{instid}}",
+										"systems",
+										"{{sysid}}",
+										"roles",
+										""
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "getRolesAssociatedWithPermission",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{basePath}}/adm/institutions/{{instid}}/systems/{{sysid}}/roles/permissions/{{permissionId}}",
+									"host": [
+										"{{basePath}}"
+									],
+									"path": [
+										"adm",
+										"institutions",
+										"{{instid}}",
+										"systems",
+										"{{sysid}}",
+										"roles",
+										"permissions",
+										"{{permissionId}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "updateRole",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"roleDescription\":\"\",\r\n\r\n\t\"roleName\":\"\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{basePath}}/adm/institutions/{{instid}}/systems/{{sysid}}/roles/{{roleeId}}",
+									"host": [
+										"{{basePath}}"
+									],
+									"path": [
+										"adm",
+										"institutions",
+										"{{instid}}",
+										"systems",
+										"{{sysid}}",
+										"roles",
+										"{{roleeId}}"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "AdmSaamfiUserRoleController",
+					"item": [
+						{
+							"name": "assignRoletoUser",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"url": {
+									"raw": "{{basePath}}/adm/institutions/{{instid}}/systems/{{sysid}}/users/{{userid}}/roles/{{roleeId}}",
+									"host": [
+										"{{basePath}}"
+									],
+									"path": [
+										"adm",
+										"institutions",
+										"{{instid}}",
+										"systems",
+										"{{sysid}}",
+										"users",
+										"{{userid}}",
+										"roles",
+										"{{roleeId}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "getUserRoles",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{basePath}}/adm/institutions/{{instid}}/systems/{{sysid}}/users/{{userid}}/roles/",
+									"host": [
+										"{{basePath}}"
+									],
+									"path": [
+										"adm",
+										"institutions",
+										"{{instid}}",
+										"systems",
+										"{{sysid}}",
+										"users",
+										"{{userid}}",
+										"roles",
+										""
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "InternalPersonRoleController",
+					"item": [
+						{
+							"name": "getPersonRoles",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{basePath}}/internal/institutions/{{instid}}/systems/{{sysid}}/users/{{userid}}/roles/",
+									"host": [
+										"{{basePath}}"
+									],
+									"path": [
+										"internal",
+										"institutions",
+										"{{instid}}",
+										"systems",
+										"{{sysid}}",
+										"users",
+										"{{userid}}",
+										"roles",
+										""
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "InternalSaamfiPermissionController",
+					"item": [
+						{
+							"name": "getAllPermissions",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{basePath}}/internal/institutions/{{instid}}/systems/{{sysid}}/permissions/",
+									"host": [
+										"{{basePath}}"
+									],
+									"path": [
+										"internal",
+										"institutions",
+										"{{instid}}",
+										"systems",
+										"{{sysid}}",
+										"permissions",
+										""
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "OperSaamfiPermissionController",
+					"item": [
+						{
+							"name": "getAllPermissions",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{basePath}}/oper/institutions/{{instid}}/systems/{{sysid}}/permissions",
+									"host": [
+										"{{basePath}}"
+									],
+									"path": [
+										"oper",
+										"institutions",
+										"{{instid}}",
+										"systems",
+										"{{sysid}}",
+										"permissions"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "OperSaamfiRoleController",
+					"item": [
+						{
+							"name": "createRole",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"roleDescription\":\"\",\r\n\r\n\t\"roleName\":\"\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{basePath}}/oper/institutions/{{instid}}/systems/{{sysid}}/roles/",
+									"host": [
+										"{{basePath}}"
+									],
+									"path": [
+										"oper",
+										"institutions",
+										"{{instid}}",
+										"systems",
+										"{{sysid}}",
+										"roles",
+										""
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "DeleteRole",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{basePath}}/oper/institutions/{{instid}}/systems/{{sysid}}/roles/{{roleeId}}",
+									"host": [
+										"{{basePath}}"
+									],
+									"path": [
+										"oper",
+										"institutions",
+										"{{instid}}",
+										"systems",
+										"{{sysid}}",
+										"roles",
+										"{{roleeId}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "getExistingRolee",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{basePath}}/oper/institutions/{{instid}}/systems/{{sysid}}/roles/",
+									"host": [
+										"{{basePath}}"
+									],
+									"path": [
+										"oper",
+										"institutions",
+										"{{instid}}",
+										"systems",
+										"{{sysid}}",
+										"roles",
+										""
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "getRolesAssociatedWithPermission",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{basePath}}/oper/institutions/{{instid}}/systems/{{sysid}}/roles/permissions/{{permissionId}}",
+									"host": [
+										"{{basePath}}"
+									],
+									"path": [
+										"oper",
+										"institutions",
+										"{{instid}}",
+										"systems",
+										"{{sysid}}",
+										"roles",
+										"permissions",
+										"{{permissionId}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "updateRole",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \r\n\t\"roleDescription\":\"\",\r\n\r\n\t\"roleName\":\"\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{basePath}}/oper/institutions/{{instid}}/systems/{{sysid}}/roles/{{roleeId}}",
+									"host": [
+										"{{basePath}}"
+									],
+									"path": [
+										"oper",
+										"institutions",
+										"{{instid}}",
+										"systems",
+										"{{sysid}}",
+										"roles",
+										"{{roleeId}}"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "OperSaamfiRolePermController",
+					"item": [
+						{
+							"name": "addPermissionToRole",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"url": {
+									"raw": "{{basePath}}/oper/institutions/{{instid}}/systems/{{sysid}}/roles/{{roleeId}}/permissions/{{permissionId}}",
+									"host": [
+										"{{basePath}}"
+									],
+									"path": [
+										"oper",
+										"institutions",
+										"{{instid}}",
+										"systems",
+										"{{sysid}}",
+										"roles",
+										"{{roleeId}}",
+										"permissions",
+										"{{permissionId}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "deletePermissionOfRole",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{basePath}}/oper/institutions/{{instid}}/systems/{{sysid}}/roles/{{roleeId}}/permissions/{{permissionId}}",
+									"host": [
+										"{{basePath}}"
+									],
+									"path": [
+										"oper",
+										"institutions",
+										"{{instid}}",
+										"systems",
+										"{{sysid}}",
+										"roles",
+										"{{roleeId}}",
+										"permissions",
+										"{{permissionId}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "queryPermissionsOfARole",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{basePath}}/oper/institutions/{{instid}}/systems/{{sysid}}/roles/{{roleeId}}/permissions/",
+									"host": [
+										"{{basePath}}"
+									],
+									"path": [
+										"oper",
+										"institutions",
+										"{{instid}}",
+										"systems",
+										"{{sysid}}",
+										"roles",
+										"{{roleeId}}",
+										"permissions",
+										""
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "OperSaamfiUserRoleController",
+					"item": [
+						{
+							"name": "assignRoletoPerson",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"url": {
+									"raw": "{{basePath}}/oper/institutions/{{instid}}/systems/{{sysid}}/users/{{userid}}/roles/{{roleeId}}",
+									"host": [
+										"{{basePath}}"
+									],
+									"path": [
+										"oper",
+										"institutions",
+										"{{instid}}",
+										"systems",
+										"{{sysid}}",
+										"users",
+										"{{userid}}",
+										"roles",
+										"{{roleeId}}"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "UserSaamfiPersonPermController",
+					"item": [
+						{
+							"name": "getActivePermissions",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{basePath}}/usr/institutions/{{instid}}/systems/{{sysid}}/users/{{userid}}/permissions/",
+									"host": [
+										"{{basePath}}"
+									],
+									"path": [
+										"usr",
+										"institutions",
+										"{{instid}}",
+										"systems",
+										"{{sysid}}",
+										"users",
+										"{{userid}}",
+										"permissions",
+										""
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "UserSaamfiPersonPermissiontypeController",
+					"item": [
+						{
+							"name": "getActivePermissiontypes",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{basePath}}/usr/institutions/{{instid}}/systems/{{sysid}}/users/{{userid}}/permissiontypes/",
+									"host": [
+										"{{basePath}}"
+									],
+									"path": [
+										"usr",
+										"institutions",
+										"{{instid}}",
+										"systems",
+										"{{sysid}}",
+										"users",
+										"{{userid}}",
+										"permissiontypes",
+										""
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "UserSaamfiRoleController",
+					"item": [
+						{
+							"name": "getPermissionByType",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{basePath}}/usr/institutions/{{instid}}/systems/{{sysid}}/roles/permissiontypes/{{permissionTypeId}}/permissions/",
+									"host": [
+										"{{basePath}}"
+									],
+									"path": [
+										"usr",
+										"institutions",
+										"{{instid}}",
+										"systems",
+										"{{sysid}}",
+										"roles",
+										"permissiontypes",
+										"{{permissionTypeId}}",
+										"permissions",
+										""
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "UserSaamfiUserRoleController",
+					"item": [
+						{
+							"name": "getPersonRoles",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{basePath}}/usr/institutions/{instid}/systems/{sysid}/users/{personid}/roles/",
+									"host": [
+										"{{basePath}}"
+									],
+									"path": [
+										"usr",
+										"institutions",
+										"{instid}",
+										"systems",
+										"{sysid}",
+										"users",
+										"{personid}",
+										"roles",
+										""
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Loggin",
+			"item": [
+				{
+					"name": "LogginController",
+					"item": [
+						{
+							"name": "getLastLog",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{basePath}}/logs/",
+									"host": [
+										"{{basePath}}"
+									],
+									"path": [
+										"logs",
+										""
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		}
+	],
+	"auth": {
+		"type": "bearer",
+		"bearer": [
+			{
+				"key": "token",
+				"value": "{{token}}",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "basePath",
+			"value": "http://localhost:9091/saamfiapi"
+		},
+		{
+			"key": "token",
+			"value": "undefined"
+		},
+		{
+			"key": "instid",
+			"value": "1"
+		},
+		{
+			"key": "sysid",
+			"value": "0"
+		},
+		{
+			"key": "userPublic",
+			"value": "user"
+		},
+		{
+			"key": "passwordPublic",
+			"value": "password"
+		},
+		{
+			"key": "captcha",
+			"value": "captcha"
+		},
+		{
+			"key": "userSuper",
+			"value": "userSuper"
+		},
+		{
+			"key": "passwordSuper",
+			"value": "passwordSuper"
+		},
+		{
+			"key": "userOper",
+			"value": "userOper"
+		},
+		{
+			"key": "passwordOper",
+			"value": "passwordOper"
+		},
+		{
+			"key": "userid",
+			"value": "1"
+		},
+		{
+			"key": "idDocument",
+			"value": "document"
+		},
+		{
+			"key": "roleeId",
+			"value": "roleId"
+		},
+		{
+			"key": "perrmissionsId",
+			"value": "01"
+		},
+		{
+			"key": "permissionId",
+			"value": "1"
+		},
+		{
+			"key": "permissionTypeId",
+			"value": "0"
+		}
+	]
+}

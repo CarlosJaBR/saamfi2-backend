@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<parent>
+		<groupId>co.edu.icesi.dev.saamfi</groupId>
+		<artifactId>saamfi-masterpom</artifactId>
+		<version>2.0.1</version>
+	</parent>
+
+	<artifactId>saamfi-logic</artifactId>
+	<name>sammfi-logic</name>
+	<description>System of Authentication and Authorization Multifactor - Services and bussines logic for the staff</description>
+
+	<properties>
+		<java.version>11</java.version>
+	</properties>
+
+	<dependencies>
+		<dependency>
+			<groupId>com.google.code.gson</groupId>
+			<artifactId>gson</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.httpcomponents</groupId>
+			<artifactId>httpclient</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-security</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-web</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>co.edu.icesi.dev.saamfi</groupId>
+			<artifactId>saamfi-entity</artifactId>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>co.edu.icesi.dev.saamfi</groupId>
+			<artifactId>saamfi-persistence</artifactId>
+			<scope>provided</scope>
+		</dependency>
+				
+		<!-- <dependency>
+			<groupId>co.edu.icesi.dev.saamfi</groupId>
+			<artifactId>saamfi-delegate</artifactId>
+			<scope>provided</scope>
+		</dependency> -->
+		<dependency>
+		    <groupId>org.apache.commons</groupId>
+		    <artifactId>commons-csv</artifactId>
+		    <version>1.8</version>
+		</dependency>
+		<!-- <dependency>
+            <groupId>com.sun.mail</groupId>
+            <artifactId>jakarta.mail</artifactId>
+        </dependency> -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-mail</artifactId>
+		</dependency>
+	</dependencies>
+
+</project>

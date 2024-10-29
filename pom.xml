@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <source>11</source>
+                    <target>11</target>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+
+    <parent>
+		<groupId>org.springframework.boot</groupId>
+		<artifactId>spring-boot-starter-parent</artifactId>
+		<version>2.6.4</version>
+	</parent>
+
+	<groupId>co.edu.icesi.dev.saamfi</groupId>
+	<artifactId>saamfi-masterpom</artifactId>
+	<version>2.0.1</version>
+	<name>saamfi-masterpom</name>
+	<description>System of Authentication and Authorization Multifactor - Masterpom</description>
+	<packaging>pom</packaging>
+
+	<properties>
+		<java.version>11</java.version>
+	</properties>
+	<dependencyManagement>
+		<dependencies>
+			<dependency>
+				<groupId>co.edu.icesi.dev.saamfi</groupId>
+				<artifactId>saamfi-entity</artifactId>
+				<version>2.0.1</version>				
+			</dependency>
+			<dependency>
+				<groupId>co.edu.icesi.dev.saamfi</groupId>
+				<artifactId>saamfi-persistence</artifactId>
+				<version>2.0.1</version>				
+			</dependency>
+			<dependency>
+				<groupId>co.edu.icesi.dev.saamfi</groupId>
+				<artifactId>saamfi-logic</artifactId>
+				<version>2.0.1</version>
+			</dependency>
+		</dependencies>
+	</dependencyManagement>
+	<dependencies>
+
+		<dependency>
+			<groupId>org.mockito</groupId>
+			<artifactId>mockito-all</artifactId>
+			<version>1.9.5</version>
+			<scope>test</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-devtools</artifactId>
+			<scope>runtime</scope>
+			<optional>true</optional>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-test</artifactId>
+			<scope>test</scope>
+		</dependency>
+			
+		<dependency>
+    		<groupId>org.springframework.boot</groupId>
+    		<artifactId>spring-boot-starter-mail</artifactId>
+		</dependency>
+		
+
+
+	</dependencies>
+
+	<modules>
+		<module>saamfi-entity</module>
+		<module>saamfi-persistence</module>
+		<module>saamfi-logic</module>
+		<module>saamfi-rest</module>
+	</modules>
+
+</project>

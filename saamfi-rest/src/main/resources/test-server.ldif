@@ -1,0 +1,185 @@
+dn: dc=springframework,dc=org
+objectclass: top
+objectclass: domain
+objectclass: extensibleObject
+dc: springframework
+
+dn: ou=groups,dc=springframework,dc=org
+objectclass: top
+objectclass: organizationalUnit
+ou: groups
+
+dn: ou=subgroups,ou=groups,dc=springframework,dc=org
+objectclass: top
+objectclass: organizationalUnit
+ou: subgroups
+
+dn: ou=people,dc=springframework,dc=org
+objectclass: top
+objectclass: organizationalUnit
+ou: people
+
+dn: ou=space cadets,dc=springframework,dc=org
+objectclass: top
+objectclass: organizationalUnit
+ou: space cadets
+
+dn: ou=\"quoted people\",dc=springframework,dc=org
+objectclass: top
+objectclass: organizationalUnit
+ou: "quoted people"
+
+dn: ou=otherpeople,dc=springframework,dc=org
+objectclass: top
+objectclass: organizationalUnit
+ou: otherpeople
+
+dn: uid=16929585,ou=people,dc=springframework,dc=org
+objectclass: top
+objectclass: person
+objectclass: organizationalPerson
+objectclass: inetOrgPerson
+cn: nn nn
+sn: Equipos
+uid: 16929585
+userPassword: 123456
+
+dn: uid=1113647442,ou=people,dc=springframework,dc=org
+objectclass: top
+objectclass: person
+objectclass: organizationalPerson
+objectclass: inetOrgPerson
+cn: nn nn
+sn: Vigia
+uid: 1113647442
+userPassword: 15394725772654685941
+
+dn: uid=100100,ou=people,dc=springframework,dc=org
+objectclass: top
+objectclass: person
+objectclass: organizationalPerson
+objectclass: inetOrgPerson
+cn: nn nn
+sn: UCCare- admin
+uid: 101101
+userPassword: 15394725772654685941
+
+dn: uid=101101,ou=people,dc=springframework,dc=org
+objectclass: top
+objectclass: person
+objectclass: organizationalPerson
+objectclass: inetOrgPerson
+cn: nn nn
+sn: UCCare- Jefe
+uid: 101101
+userPassword: 15394725772654685941
+
+dn: uid=102102,ou=people,dc=springframework,dc=org
+objectclass: top
+objectclass: person
+objectclass: organizationalPerson
+objectclass: inetOrgPerson
+cn: nn nn
+sn: UCCare analista SOMA
+uid: 102102
+userPassword: 15394725772654685941
+
+dn: uid=301301,ou=people,dc=springframework,dc=org
+objectclass: top
+objectclass: person
+objectclass: organizationalPerson
+objectclass: inetOrgPerson
+cn: nn nn
+sn: SAT Director
+uid: 301301
+userPassword: 15394725772654685941
+
+dn: uid=302302,ou=people,dc=springframework,dc=org
+objectclass: top
+objectclass: person
+objectclass: organizationalPerson
+objectclass: inetOrgPerson
+cn: nn nn
+sn: SAT Admin
+uid: 302302
+userPassword: 15394725772654685941
+
+dn: uid=303303,ou=people,dc=springframework,dc=org
+objectclass: top
+objectclass: person
+objectclass: organizationalPerson
+objectclass: inetOrgPerson
+cn: nn nn
+sn: SAT estudiante
+uid: 303303
+userPassword: 15394725772654685941
+
+dn: uid=304304,ou=people,dc=springframework,dc=org
+objectclass: top
+objectclass: person
+objectclass: organizationalPerson
+objectclass: inetOrgPerson
+cn: nn nn
+sn: SAT monitor
+uid: 304304
+userPassword: 15394725772654685941
+
+dn: uid=305305,ou=people,dc=springframework,dc=org
+objectclass: top
+objectclass: person
+objectclass: organizationalPerson
+objectclass: inetOrgPerson
+cn: nn nn
+sn: SAT suppcent
+uid: 305305
+userPassword: 15394725772654685941
+
+dn: uid=400400,ou=people,dc=springframework,dc=org
+objectclass: top
+objectclass: person
+objectclass: organizationalPerson
+objectclass: inetOrgPerson
+cn: nn nn
+sn: LunchQR admin usuarios
+uid: 400400
+userPassword: 15394725772654685941
+
+dn: uid=401401,ou=people,dc=springframework,dc=org
+objectclass: top
+objectclass: person
+objectclass: organizationalPerson
+objectclass: inetOrgPerson
+cn: nn nn
+sn: LunchQR Cafetería
+uid: 401401
+userPassword: 15394725772654685941
+
+dn: uid=402402,ou=people,dc=springframework,dc=org
+objectclass: top
+objectclass: person
+objectclass: organizationalPerson
+objectclass: inetOrgPerson
+cn: nn nn
+sn: LunchQR Estudiante
+uid: 402402
+userPassword: 15394725772654685941
+
+dn: uid=403403,ou=people,dc=springframework,dc=org
+objectclass: top
+objectclass: person
+objectclass: organizationalPerson
+objectclass: inetOrgPerson
+cn: nn nn
+sn: LunchQR apoyo financiero
+uid: 403403
+userPassword: 15394725772654685941
+
+dn: uid=11001100,ou=people,dc=springframework,dc=org
+objectclass: top
+objectclass: person
+objectclass: organizationalPerson
+objectclass: inetOrgPerson
+cn: nn nn
+sn: Panini user
+uid: 11001100
+userPassword: 15394725772654685941
