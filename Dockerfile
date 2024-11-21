@@ -1,37 +1,38 @@
-#...Etapa 1...
-# Build project
+# Etapa 1: Construcción
 FROM maven:3.8.6-openjdk-11 AS builder
-# root source
+
+# Directorio raíz
 WORKDIR /source
-# add files to contenedor
+
+# Copiar todos los archivos al contenedor
 ADD . /source
 
+# Hacer ejecutable el script mvnw
 RUN chmod +x mvnw
 
-# add ojdbc6 dependency to maven
+# Añadir la dependencia ojdbc6 a Maven
 ADD libs/ojdbc6-11.2.0.3.jar /source/libs/ojdbc6-11.2.0.3.jar
 RUN mvn install:install-file \
-    -Dfile=libs/ojdbc6-11.2.0.3.jar \
+    -Dfile=/source/libs/ojdbc6-11.2.0.3.jar \
     -DgroupId=oracle \
     -DartifactId=ojdbc6 \
     -Dversion=11.2.0.3 \
-    -Dpackaging=jar \
+    -Dpackaging=jar
 
-# build project and skip some test
+# Construir el proyecto y saltar las pruebas
 RUN mvn package -DskipTests
 
-#...Etapa 2...
-#Runtime
+# Etapa 2: Ejecución
 FROM openjdk:11-jre-slim
 
-#directory to app
+# Directorio para la aplicación
 WORKDIR /application
 
-# coppy war file of past stage
-COPY --from=builder /source/saamfi-rest/target/saamfiapi.war /application/app.war
+# Copiar el archivo WAR o JAR desde la etapa anterior
+COPY --from=builder /source/target/saamfiapi.war /application/app.war
 
-# expose port 8080
+# Exponer el puerto 8080
 EXPOSE 8080
 
-# commant to run the app
+# Comando para ejecutar la aplicación
 ENTRYPOINT ["java", "-jar", "/application/app.war"]
