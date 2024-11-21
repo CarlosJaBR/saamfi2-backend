@@ -17,7 +17,7 @@ RUN mvn install:install-file \
     -Dpackaging=jar
 
 # Compilar el proyecto
-RUN mvn package -DskipTests
+RUN mvn clean install -Dmaven.test.skip=true
 
 # Etapa 2: Ejecución
 FROM openjdk:11-jre-slim
