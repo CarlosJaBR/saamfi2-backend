@@ -20,7 +20,7 @@ RUN mvn install:install-file \
     -Dpackaging=jar
 
 # Construir el proyecto y saltar las pruebas
-RUN mvn package -DskipTests
+RUN mvn clean install -Dmaven.test.skip=true
 
 # Etapa 2: Ejecución
 FROM openjdk:11-jre-slim
@@ -29,10 +29,10 @@ FROM openjdk:11-jre-slim
 WORKDIR /application
 
 # Copiar el archivo WAR o JAR desde la etapa anterior
-COPY --from=builder /source/target/saamfiapi.war /application/app.war
+COPY --from=build /app/saamfi-rest/target/saamfiapi.war /app/saamfi-backend.war
 
 # Exponer el puerto 8080
 EXPOSE 8080
 
 # Comando para ejecutar la aplicación
-ENTRYPOINT ["java", "-jar", "/application/app.war"]
+CMD ["java", "-jar", "/app/saamfi-backend.war"]
